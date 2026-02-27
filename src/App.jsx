@@ -666,6 +666,8 @@ const App = () => {
 
     if (Object.keys(nodes).length > 0) {
       setTreeData({ settings, nodes });
+      setCompareLeftIdx(null);
+      setCompareRightIdx(null);
       const firstKey = nodes["0"] ? "0" : Object.keys(nodes)[0];
       const initialPath = buildAutoFoldPath(firstKey, nodes);
       setActiveNodes(initialPath);
@@ -929,7 +931,7 @@ const App = () => {
               {/* 左侧功能区：固定 36px 宽度，使右侧边框与下方矩阵左边缘像素级对齐 */}
               <div className="flex flex-col justify-center items-center shrink-0 w-[36px] border-r border-slate-700/50 gap-2">
                 <button 
-                  onClick={() => { setAppView('lobby'); setTreeData(null); }}
+                  onClick={() => { setAppView('lobby'); setTreeData(null); setCompareLeftIdx(null); setCompareRightIdx(null); }}
                   className="flex items-center justify-center w-6 h-6 rounded-md bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-700 transition-all active:scale-95 border border-slate-700 shadow-sm"
                   title="返回"
                 >
@@ -1054,10 +1056,8 @@ const App = () => {
                                                         {getActionLabel(action)}
                                                     </span>
                                                     
-                                                    {hasNode ? (
+                                                    {hasNode && (
                                                         <ChevronRight size={12} className={`transition-transform flex-shrink-0 ml-0.5 ${isSelected ? 'text-slate-300 translate-x-0.5' : 'text-slate-600 group-hover:text-slate-400'}`} />
-                                                    ) : (
-                                                        <span className={`text-[9px] font-normal whitespace-nowrap ml-1 scale-90 flex-shrink-0 transition-colors ${isSelected ? 'text-slate-300' : 'text-slate-600 group-hover:text-slate-400'}`}>终点</span>
                                                     )}
                                                 </button>
                                             );
