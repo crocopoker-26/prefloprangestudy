@@ -47,8 +47,18 @@ const FOLDERS_DB = [
     icon: Swords,
     color: 'from-blue-500 to-indigo-600',
     ranges: [
-      { id: 'hu-20bb', title: 'HU 20BB 短码单挑', desc: '单挑末期极短码的 Push/Fold 与小尺寸诱导策略。', url: 'https://example.com/mock-hu-20bb.zip', type: 'HU', difficulty: '必修' },
-      { id: 'hu-50bb', title: 'HU 50BB 深码单挑', desc: '翻牌后复杂博弈，面对高频 3Bet 的范围构建。', url: 'https://example.com/mock-hu-50bb.zip', type: 'HU', difficulty: '进阶' }
+      { id: 'hu-10bb', title: 'HU 10BB', desc: '单挑末期短码的 10BB 策略。', 
+	  url: '/range/offline_hu/HU10bb.zip', type: 'HU', difficulty: '必修' },
+	  { id: 'hu-15bb', title: 'HU 15BB', desc: '单挑末期短码的 15BB 策略。', 
+	  url: '/range/offline_hu/HU15bb.zip', type: 'HU', difficulty: '必修' },
+	  { id: 'hu-20bb', title: 'HU 20BB', desc: '单挑中后期的 20BB 策略。', 
+	  url: '/range/offline_hu/HU20bb.zip', type: 'HU', difficulty: '必修' },
+	  { id: 'hu-25bb', title: 'HU 25BB', desc: '单挑中后期的 25BB 策略。', 
+	  url: '/range/offline_hu/HU25bb.zip', type: 'HU', difficulty: '必修' },
+      { id: 'hu-30bb', title: 'HU 30BB', desc: '单挑中期的 30BB 策略。', 
+	  url: '/range/offline_hu/HU30bb.zip', type: 'HU', difficulty: '进阶' },
+	  { id: 'hu-40bb', title: 'HU 40BB', desc: '单挑中期的 40BB 策略。', 
+	  url: '/range/offline_hu/HU40bb.zip', type: 'HU', difficulty: '进阶' }
     ]
   },
   {
