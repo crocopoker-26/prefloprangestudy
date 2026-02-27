@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 隐藏部分浏览器的默认滚动条，保持界面清爽 */
+::-webkit-scrollbar {
+  display: none;
+}
