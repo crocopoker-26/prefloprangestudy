@@ -425,11 +425,21 @@ const App = () => {
     const newHands = {};
     const foldIndex = actions.findIndex(a => a.type === 'F');
 
+    // 1. 先计算出当前节点所有手牌中的原生最大权重 (rawMaxWeight)
+    let rawMaxWeight = 0;
+    Object.values(parsedData.hands).forEach(h => {
+      if (h.weight > rawMaxWeight) rawMaxWeight = h.weight;
+    });
+
     for (const [hand, data] of Object.entries(parsedData.hands)) {
       let newPlayed = [...data.played];
       let newEvs = [...data.evs];
       let newWeight = data.weight;
-      if (newWeight < 0.05) newWeight = 0;
+      
+      // 2. 核心修改：标准化（相对于当前节点最大权重）以后低于 1% (0.01) 的才清洗掉
+      if (rawMaxWeight > 0 && (newWeight / rawMaxWeight) < 0.01) {
+        newWeight = 0;
+      }
 
       if (enableCleaning) {
         let sum = 0;
@@ -528,17 +538,21 @@ const App = () => {
   }, [processedHands, isCompareActive, compareLeftIdx, compareRightIdx]);
 
   const stats = useMemo(() => {
-    if (!processedHands) return null;
+    if (!parsedData || !parsedData.hands) return null;
     let totalCombos = 0;
     let actionCombos = new Array(actions.length).fill(0);
-    Object.entries(processedHands).forEach(([hand, h]) => {
+    
+    // 直接遍历原始的 parsedData，而不是清洗过的 processedHands
+    Object.entries(parsedData.hands).forEach(([hand, h]) => {
+      // 采用最原始的权重和策略概率，计算绝对真实的总体频率
       const combos = getCombos(hand) * h.weight; 
       totalCombos += combos;
       h.played.forEach((p, idx) => { actionCombos[idx] += p * combos; });
     });
+    
     if (totalCombos === 0) return actionCombos.map(() => '0.00');
     return actionCombos.map(w => ((w / totalCombos) * 100).toFixed(2));
-  }, [processedHands, actions.length]);
+  }, [parsedData, actions.length]);
 
   const getActionLabel = (action) => {
     const amountInBB = action.amount ? parseFloat((action.amount / bbSize).toFixed(2)) : '';
@@ -1018,7 +1032,7 @@ const App = () => {
                                       className={`flex items-center justify-between pl-2.5 pr-1.5 py-1 mb-[2px] shrink-0 rounded transition-colors w-full ${isCurrentFocus ? 'bg-indigo-600 shadow-sm' : 'hover:bg-slate-700/30'}`}
                                     >
                                         <span className={`text-[12px] font-medium leading-none uppercase tracking-wider ${isCurrentFocus ? 'text-white' : 'text-slate-300'}`}>{playerName}</span>
-                                        <span className={`text-[12px] font-mono leading-none font-medium ${isCurrentFocus ? 'text-white opacity-100' : 'text-slate-300 opacity-90'}`}>{remainingDisplay}</span>
+                                        <span className={`text-[12px] leading-none font-medium ${isCurrentFocus ? 'text-white opacity-100' : 'text-slate-300 opacity-90'}`}>{remainingDisplay}</span>
                                     </button>
 
                                     <div className="flex flex-col gap-[1px] flex-1 overflow-hidden">
@@ -1323,8 +1337,11 @@ const App = () => {
                       </div>
                     ) : (
                       <>
-                        <div className="shrink-0 flex items-baseline gap-3 mb-3">
+                        <div className="shrink-0 flex items-baseline gap-2 mb-3">
                           <h2 className="text-3xl font-black text-white italic tracking-tighter">{lockedHand || hoveredHand}</h2>
+                          <span className="text-[13px] font-medium italic text-slate-500 tracking-wider">
+                            {parsedData.hands[lockedHand || hoveredHand]?.weight?.toFixed(3) || '0.000'}
+                          </span>
                         </div>
                         
                         {/* 表头说明 */}
