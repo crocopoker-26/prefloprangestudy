@@ -47,18 +47,12 @@ const FOLDERS_DB = [
     icon: Swords,
     color: 'from-blue-500 to-indigo-600',
     ranges: [
-      { id: 'hu-10bb', title: 'HU 10BB', desc: '单挑末期短码的 10BB 策略。', 
-	  url: '/range/offline_hu/HU10bb.zip', type: 'HU', difficulty: '必修' },
-	  { id: 'hu-15bb', title: 'HU 15BB', desc: '单挑末期短码的 15BB 策略。', 
-	  url: '/range/offline_hu/HU15bb.zip', type: 'HU', difficulty: '必修' },
-	  { id: 'hu-20bb', title: 'HU 20BB', desc: '单挑中后期的 20BB 策略。', 
-	  url: '/range/offline_hu/HU20bb.zip', type: 'HU', difficulty: '必修' },
-	  { id: 'hu-25bb', title: 'HU 25BB', desc: '单挑中后期的 25BB 策略。', 
-	  url: '/range/offline_hu/HU25bb.zip', type: 'HU', difficulty: '必修' },
-      { id: 'hu-30bb', title: 'HU 30BB', desc: '单挑中期的 30BB 策略。', 
-	  url: '/range/offline_hu/HU30bb.zip', type: 'HU', difficulty: '进阶' },
-	  { id: 'hu-40bb', title: 'HU 40BB', desc: '单挑中期的 40BB 策略。', 
-	  url: '/range/offline_hu/HU40bb.zip', type: 'HU', difficulty: '进阶' }
+      { id: 'hu-10bb', title: 'HU 10BB', desc: '单挑末期短码的 10BB 策略。', url: '/range/offline_hu/HU10bb.zip', type: 'HU', difficulty: '必修' },
+	    { id: 'hu-15bb', title: 'HU 15BB', desc: '单挑末期短码的 15BB 策略。', url: '/range/offline_hu/HU15bb.zip', type: 'HU', difficulty: '必修' },
+	    { id: 'hu-20bb', title: 'HU 20BB', desc: '单挑中后期的 20BB 策略。', url: '/range/offline_hu/HU20bb.zip', type: 'HU', difficulty: '必修' },
+	    { id: 'hu-25bb', title: 'HU 25BB', desc: '单挑中后期的 25BB 策略。', url: '/range/offline_hu/HU25bb.zip', type: 'HU', difficulty: '必修' },
+      { id: 'hu-30bb', title: 'HU 30BB', desc: '单挑中期的 30BB 策略。', url: '/range/offline_hu/HU30bb.zip', type: 'HU', difficulty: '进阶' },
+	    { id: 'hu-40bb', title: 'HU 40BB', desc: '单挑中期的 40BB 策略。', url: '/range/offline_hu/HU40bb.zip', type: 'HU', difficulty: '进阶' }
     ]
   },
   {
@@ -68,7 +62,7 @@ const FOLDERS_DB = [
     icon: Coins,
     color: 'from-emerald-500 to-teal-600',
     ranges: [
-      { id: 'cash-nl200', title: 'NL200 Cash 100BB', desc: '重点针对高抽水环境下的防守盲注与 3Bet 锅进行优化。', url: 'https://example.com/mock-cash-nl200.zip', type: 'Cash', difficulty: '大师' }
+      { id: 'cash-nl200', title: 'NL200 Cash 100BB', desc: '重点针对高抽水环境下的防守盲注与 3Bet 锅进行优化。', url: '/ranges/cash-nl200.zip', type: 'Cash', difficulty: '大师' }
     ]
   },
   {
@@ -78,9 +72,9 @@ const FOLDERS_DB = [
     icon: Zap,
     color: 'from-rose-500 to-red-600',
     ranges: [
-      { id: 'wpt-turbo-15bb', title: 'WPT极速 15BB', desc: '极限生存阶段，ICM 强压下的首入局全下与跟注标准。', url: 'https://example.com/mock-wpt-turbo-15bb.zip', type: 'MTT', difficulty: '必修' },
-      { id: 'wpt-turbo-25bb', title: 'WPT极速 25BB', desc: '极速赛核心深度，包含高频的 3Bet All-in 与防守反击策略。', url: 'https://example.com/mock-wpt-turbo-25bb.zip', type: 'MTT', difficulty: '核心' },
-      { id: 'wpt-turbo-40bb', title: 'WPT极速 40BB', desc: '比赛早期或筹码领先者的扩张策略。', url: 'https://example.com/mock-wpt-turbo-40bb.zip', type: 'MTT', difficulty: '进阶' }
+      { id: 'wpt-turbo-15bb', title: 'WPT极速 15BB', desc: '极限生存阶段，ICM 强压下的首入局全下与跟注标准。', url: '/ranges/wpt-turbo-15bb.zip', type: 'MTT', difficulty: '必修' },
+      { id: 'wpt-turbo-25bb', title: 'WPT极速 25BB', desc: '极速赛核心深度，包含高频的 3Bet All-in 与防守反击策略。', url: '/ranges/wpt-turbo-25bb.zip', type: 'MTT', difficulty: '核心' },
+      { id: 'wpt-turbo-40bb', title: 'WPT极速 40BB', desc: '比赛早期或筹码领先者的扩张策略。', url: '/ranges/wpt-turbo-40bb.zip', type: 'MTT', difficulty: '进阶' }
     ]
   },
   {
@@ -90,7 +84,7 @@ const FOLDERS_DB = [
     icon: Crown,
     color: 'from-amber-500 to-orange-600',
     ranges: [
-      { id: 'wpt-main-100bb', title: 'WPT主赛 100BB', desc: '早期阶段 100BB 深度，涵盖完整 8 人桌 GTO 策略。', url: 'https://example.com/mock-wpt-main-100bb.zip', type: 'MTT', difficulty: '核心' }
+      { id: 'wpt-main-100bb', title: 'WPT主赛 100BB', desc: '早期阶段 100BB 深度，涵盖完整 8 人桌 GTO 策略。', url: '/ranges/wpt-main-100bb.zip', type: 'MTT', difficulty: '核心' }
     ]
   }
 ];
@@ -348,11 +342,10 @@ const App = () => {
     if (treeData && treeData.nodes && currentNodeId) {
       setJsonInput(JSON.stringify(treeData.nodes[currentNodeId], null, 2));
       
-      // 使用回调函数形式，避免把 state 加入依赖数组导致一选中就被重置
       setCompareLeftIdx(prev => typeof prev === 'number' ? null : prev);
       setCompareRightIdx(prev => typeof prev === 'number' ? null : prev);
     }
-  }, [currentNodeId, treeData]); // <-- 这里移除了 compareLeftIdx 和 compareRightIdx 的依赖
+  }, [currentNodeId, treeData]);
 
   const parsedData = useMemo(() => {
     try { return JSON.parse(jsonInput); } catch (e) { return null; }
@@ -958,12 +951,49 @@ const App = () => {
                         const nodeActions = nodeData.actions || [];
                         const gameState = calculateGameState(nodeData.sequence, treeData);
                         
-                        let initialStack = treeData.settings?.handdata?.stacks?.[nodeData.player] || 0;
-                        if (treeData.settings?.handdata?.stacks?.length === 2) {
-                            initialStack = Math.min(...treeData.settings.handdata.stacks);
-                        }
+                        // ===== 全新升级：动态有效筹码计算 (支持 BB Ante 精确扣除) =====
+                        const allStacks = treeData.settings?.handdata?.stacks || [];
+                        const totalPlayersInHand = allStacks.length || 2;
+                        let initialStack = allStacks[nodeData.player] || 0;
+                        let remainingRaw = 0;
 
-                        const remainingRaw = Math.max(0, initialStack - (gameState.antes[nodeData.player] || 0) - (gameState.currentBets[nodeData.player] || 0));
+                        if (allStacks.length > 0) {
+                            const activePlayers = new Set();
+                            for (let i = 0; i < totalPlayersInHand; i++) activePlayers.add(i);
+                            
+                            // 读取当前节点前的历史记录，剔除所有已经 Fold 的玩家
+                            for (const act of (nodeData.sequence || [])) {
+                                if (act.type === 'F') activePlayers.delete(act.player);
+                            }
+
+                            // 1. 计算所有人的税后(扣除 Ante 后)筹码
+                            const postAnteStacks = allStacks.map((st, pIdx) => Math.max(0, st - (gameState.antes[pIdx] || 0)));
+
+                            // 2. 在剩余活跃玩家中，找出对手的最大税后筹码量
+                            let maxOtherPostAnte = 0;
+                            let hasOtherActive = false;
+                            for (const p of activePlayers) {
+                                if (p !== nodeData.player) {
+                                    hasOtherActive = true;
+                                    const pStack = postAnteStacks[p] || 0;
+                                    if (pStack > maxOtherPostAnte) maxOtherPostAnte = pStack;
+                                }
+                            }
+                            
+                            // 3. 自身税后筹码和对手最大税后筹码取小者，即为此时真实的"有效税后筹码"
+                            let effectivePostAnteStack = postAnteStacks[nodeData.player] || 0;
+                            if (hasOtherActive) {
+                                effectivePostAnteStack = Math.min(effectivePostAnteStack, maxOtherPostAnte);
+                            }
+
+                            // 4. 最终后手剩余 = 有效税后筹码 - 当前轮该玩家已下注金额
+                            remainingRaw = Math.max(0, effectivePostAnteStack - (gameState.currentBets[nodeData.player] || 0));
+                        } else {
+                            // Fallback：如果没有 stacks 数据，采用原始基础减法
+                            remainingRaw = Math.max(0, initialStack - (gameState.antes[nodeData.player] || 0) - (gameState.currentBets[nodeData.player] || 0));
+                        }
+                        // ===================================
+
                         let remainingDisplay = (remainingRaw / bbSize).toFixed(1);
                         if (remainingDisplay.endsWith('.0')) remainingDisplay = remainingDisplay.slice(0, -2);
 
@@ -1159,6 +1189,7 @@ const App = () => {
                             const potInBB = gameStateInfo.potInBB;
                             const diffPct = (Math.abs(diff) / potInBB) * 100;
                             
+                            // 调整 alpha 透明度以更好地展示热力图差异
                             if (diffPct > 10) { bgOpacity = 1.0; isBlunder = true; }
                             else if (diffPct >= 3) bgOpacity = 0.8;
                             else if (diffPct >= 1) bgOpacity = 0.5;
