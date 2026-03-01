@@ -47,12 +47,13 @@ const FOLDERS_DB = [
     icon: Swords,
     color: 'from-blue-500 to-indigo-600',
     ranges: [
-      { id: 'hu-10bb', title: 'HU 10BB', desc: '单挑末期短码的 10BB 策略。', url: '/range/offline_hu/HU10bb.zip', type: 'HU', difficulty: '必修' },
-	    { id: 'hu-15bb', title: 'HU 15BB', desc: '单挑末期短码的 15BB 策略。', url: '/range/offline_hu/HU15bb.zip', type: 'HU', difficulty: '必修' },
-	    { id: 'hu-20bb', title: 'HU 20BB', desc: '单挑中后期的 20BB 策略。', url: '/range/offline_hu/HU20bb.zip', type: 'HU', difficulty: '必修' },
-	    { id: 'hu-25bb', title: 'HU 25BB', desc: '单挑中后期的 25BB 策略。', url: '/range/offline_hu/HU25bb.zip', type: 'HU', difficulty: '必修' },
-      { id: 'hu-30bb', title: 'HU 30BB', desc: '单挑中期的 30BB 策略。', url: '/range/offline_hu/HU30bb.zip', type: 'HU', difficulty: '进阶' },
-	    { id: 'hu-40bb', title: 'HU 40BB', desc: '单挑中期的 40BB 策略。', url: '/range/offline_hu/HU40bb.zip', type: 'HU', difficulty: '进阶' }
+      { id: 'hu-10bb', title: '10BB', desc: '单挑末期短码的 10BB 策略。', url: '/range/offline_hu/HU10bb.zip', type: 'HU', difficulty: '必修' },
+	    { id: 'hu-15bb', title: '15BB', desc: '单挑末期短码的 15BB 策略。', url: '/range/offline_hu/HU15bb.zip', type: 'HU', difficulty: '必修' },
+	    { id: 'hu-20bb', title: '20BB', desc: '单挑中后期的 20BB 策略。', url: '/range/offline_hu/HU20bb.zip', type: 'HU', difficulty: '进阶' },
+	    { id: 'hu-25bb', title: '25BB', desc: '单挑中后期的 25BB 策略。', url: '/range/offline_hu/HU25bb.zip', type: 'HU', difficulty: '进阶' },
+		  { id: 'hu-30bb', title: '30BB', desc: '单挑中期的 30BB 策略。', url: '/range/offline_hu/HU30bb.zip', type: 'HU', difficulty: '进阶' },
+	    { id: 'hu-40bb', title: '40BB', desc: '单挑中期的 40BB 策略。', url: '/range/offline_hu/HU40bb.zip', type: 'HU', difficulty: '高阶' },
+		  { id: 'hu-50bb', title: '50BB', desc: '单挑中期的 50BB 策略。', url: '/range/offline_hu/HU50bb.zip', type: 'HU', difficulty: '高阶' }
     ]
   },
   {
@@ -1180,6 +1181,7 @@ const App = () => {
                       
                       let isHeatmap = isCompareActive && compareLeftIdx === 'best';
                       let isBlunder = false; 
+                      let currentDiff = 0;
 
                       if (!isZeroWeight && h) {
                         let currentPercent = 0;
@@ -1196,12 +1198,12 @@ const App = () => {
                         if (isCompareActive) {
                           const leftEv = getHandActionEv(h, compareLeftIdx);
                           const rightEv = getHandActionEv(h, compareRightIdx);
-                          const diff = leftEv - rightEv;
+                          currentDiff = leftEv - rightEv;
                           
                           if (isHeatmap) {
                             strategyGradient = defaultGradient;
                             const potInBB = gameStateInfo.potInBB;
-                            const diffPct = (Math.abs(diff) / potInBB) * 100;
+                            const diffPct = (Math.abs(currentDiff) / potInBB) * 100;
                             
                             // 调整 alpha 透明度以更好地展示热力图差异
                             if (diffPct > 10) { bgOpacity = 1.0; isBlunder = true; }
@@ -1209,14 +1211,14 @@ const App = () => {
                             else if (diffPct >= 1) bgOpacity = 0.5;
                             else bgOpacity = 0.2;
                             
-                            evDisplayVal = formatEvValue(diff, 2, true); 
+                            evDisplayVal = formatEvValue(currentDiff, 2, true); 
                           } else {
-                            strategyGradient = getCompareColor(diff);
-                            evDisplayVal = formatEvValue(diff, 2, true);
+                            strategyGradient = getCompareColor(currentDiff);
+                            evDisplayVal = formatEvValue(currentDiff, 2, true);
                           }
                         } else {
-                            strategyGradient = defaultGradient;
-                            evDisplayVal = formatEvValue(Math.max(...h.evs));
+                          strategyGradient = defaultGradient;
+                          evDisplayVal = formatEvValue(Math.max(...h.evs));
                         }
                       }
 
@@ -1231,7 +1233,13 @@ const App = () => {
                       if (isHeatmap) {
                         evClass = (theme === 'wizard' || theme === 'darknight') ? 'text-white font-bold' : 'text-black font-black';
                       } else if (isCompareActive) {
-                        evClass = 'text-black font-bold';
+                        if (currentDiff > 0.0005) {
+                          evClass = 'text-[#064e3b] font-black'; // Emerald 900
+                        } else if (currentDiff < -0.0005) {
+                          evClass = 'text-[#881337] font-black'; // Rose 900
+                        } else {
+                          evClass = 'text-slate-900 font-bold';
+                        }
                       } else if (h && Math.max(...h.evs) < -0.005) {
                         evClass = themeConfig.evNeg;
                       }
